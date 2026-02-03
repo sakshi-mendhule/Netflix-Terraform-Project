@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #141414; color: white; font-family: 'Arial', sans-serif; overflow-x: hidden; }
+        .navbar { background: rgba(0,0,0,0.8); padding: 10px 50px; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; z-index: 10; }
+        .navbar .logo { font-size: 2em; color: #e50914; font-weight: bold; }
+        .navbar .nav-links { display: flex; gap: 20px; }
+        .navbar a { color: white; text-decoration: none; }
+        .navbar .profile { width: 40px; height: 40px; background: #e50914; border-radius: 50%; }
+        .hero { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/1920x1080/000000/ffffff?text=Hero+Banner'); height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+        .hero h1 { font-size: 3em; margin-bottom: 20px; }
+        .hero p { font-size: 1.2em; margin-bottom: 30px; }
+        .hero button { background: #e50914; color: white; border: none; padding: 15px 30px; font-size: 1.2em; cursor: pointer; border-radius: 5px; }
+        .row { margin: 50px 0; padding: 0 50px; }
+        .row h2 { margin-bottom: 20px; font-size: 1.5em; }
+        .thumbnails { display: flex; gap: 10px; overflow-x: scroll; }
+        .thumbnail { width: 200px; height: 120px; background: #333; border-radius: 5px; cursor: pointer; transition: transform 0.3s; position: relative; }
+        .thumbnail:hover { transform: scale(1.1); }
+        .thumbnail img { width: 100%; height: 100%; object-fit: cover; border-radius: 5px; }
+        .thumbnail .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 2em; color: white; opacity: 0; transition: opacity 0.3s; }
+        .thumbnail:hover .play-icon { opacity: 1; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 20; }
+        .modal-content { background: #141414; padding: 20px; border-radius: 10px; text-align: center; max-width: 600px; }
+        .modal video { width: 100%; }
+        .close { position: absolute; top: 10px; right: 20px; color: white; font-size: 2em; cursor: pointer; }
+        @media (max-width: 768px) { .navbar { padding: 10px 20px; } .hero h1 { font-size: 2em; } .thumbnails { gap: 5px; } .thumbnail { width: 150px; height: 90px; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Netflix Clone</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">TV Shows</a>
+            <a href="#">Movies</a>
+            <a href="#">My List</a>
+        </div>
+        <div class="profile"></div>
+    </nav>
+
+    <section class="hero">
+        <div>
+            <h1>Watch Unlimited Movies & TV</h1>
+            <p>Stream anywhere, anytime.</p>
+            <button onclick="playVideo('sample-video.mp4')">Play Now</button>
+        </div>
+    </section>
+
+    <div class="row">
+        <h2>Trending Now</h2>
+        <div class="thumbnails">
+            <div class="thumbnail" onclick="openModal('sample-video.mp4')">
+                <img src="https://via.placeholder.com/200x120/333/fff?text=Movie+1" alt="Movie 1">
+                <div class="play-icon">▶</div>
+            </div>
+            <div class="thumbnail" onclick="openModal('sample-video.mp4')">
+                <img src="https://via.placeholder.com/200x120/333/fff?text=Movie+2" alt="Movie 2">
+                <div class="play-icon">▶</div>
+            </div>
+            <!-- Add more thumbnails as needed -->
+        </div>
+    </div>
+
+    <div class="row">
+        <h2>Top Rated</h2>
+        <div class="thumbnails">
+            <div class="thumbnail" onclick="openModal('sample-video.mp4')">
+                <img src="https://via.placeholder.com/200x120/333/fff?text=Top+1" alt="Top 1">
+                <div class="play-icon">▶</div>
+            </div>
+            <!-- Add more -->
+        </div>
+    </div>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <video id="modalVideo" controls></video>
+        </div>
+    </div>
+
+    <script>
+        function openModal(videoSrc) {
+            document.getElementById('modalVideo').src = videoSrc;
+            document.getElementById('videoModal').style.display = 'flex';
+        }
+        function closeModal() {
+            document.getElementById('videoModal').style.display = 'none';
+            document.getElementById('modalVideo').src = '';
+        }
+        function playVideo(videoSrc) {
+            openModal(videoSrc);
+        }
+    </script>
+</body>
+</html>
