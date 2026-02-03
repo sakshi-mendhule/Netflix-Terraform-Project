@@ -1,0 +1,1 @@
+netflix-terraform-project/ ├── main.tf # Core Terraform resources ├── variables.tf # Input variables ├── outputs.tf # Deployment outputs ├── terraform.tfvars # Variable overrides (optional) ├── content/ │ └── index.html # Fancy Netflix GUI ├── .gitignore # Excludes sensitive files └── README.md # This file
